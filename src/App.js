@@ -1,8 +1,31 @@
+import { ThemeProvider, Container, CssBaseline } from "@material-ui/core";
+
+import { BrowserRouter, Route } from "react-router-dom";
+
+import SignIn from "./Screens/SignIn/SignIn";
+import HomeScreen from "./Screens/Home/HomeScreen";
+import RegistrationScreen from "./Screens/Register/RegisterScreen";
+
+import theme from "./theme";
+
+import useStyles from "./styles";
+
 const App = () => {
+  const classes = useStyles();
+
   return (
-    <div className="App">
-      <h1>Hi</h1>
-    </div>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Container maxWidth={"lg"}>
+          <main className={classes.mainWrapper}>
+            <Route path="/" exact component={HomeScreen} />
+            <Route path="/login" component={SignIn} />
+            <Route path="/register" component={RegistrationScreen} />
+          </main>
+        </Container>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 };
 
