@@ -1,57 +1,57 @@
-import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
-import { blue, red } from "@material-ui/core/colors";
+import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import { blue, red } from '@material-ui/core/colors';
 
 const theme = createMuiTheme({
-  palette: {
-    //type: "dark",
-    primary: {
-     main: '#6c63ff',
+    palette: {
+        //type: "dark",
+        primary: {
+            main: '#6c63ff',
+        },
+        secondary: {
+            main: '#6c63ff',
+        },
     },
-    secondary: {
-      main: '#6c63ff',
+    typography: {
+        fontFamily: 'Lato',
+        color: '#000',
+        h1: {
+            fontFamily: 'Prata',
+        },
+        h2: {
+            fontFamily: 'Prata',
+        },
+        h3: {
+            fontFamily: 'Prata',
+        },
+        h4: {
+            fontFamily: 'Prata',
+        },
+        h5: {
+            fontFamily: 'Prata',
+        },
+        h6: {
+            fontFamily: 'Prata',
+        },
+        subtitle1: {
+            fontFamily: 'Lato',
+        },
     },
-  },
-  typography: {
-    fontFamily: "Lato",
-    color: '#000',
-    h1: {
-      fontFamily: "Prata",
+    props: {
+        MuiTooltip: {
+            arrow: true,
+        },
     },
-    h2: {
-      fontFamily: "Prata",
+    shape: {
+        borderRadius: 10,
     },
-    h3: {
-      fontFamily: "Prata",
+    overrides: {
+        MuiStepper: {
+            root: {
+                background: 'none',
+                border: 'none',
+            },
+        },
     },
-    h4: {
-      fontFamily: "Prata",
-    },
-    h5: {
-      fontFamily: "Prata",
-    },
-    h6: {
-      fontFamily: "Prata",
-    },
-    subtitle1: {
-      fontFamily: "Lato",
-    },
-  },
-  props: {
-    MuiTooltip: {
-      arrow: true,
-    },
-  },
-  shape: {
-    borderRadius: 10,
-  },
-  overrides: {
-    MuiStepper: {
-      root: {
-        background: "none",
-        border: "none",
-      },
-    },
-  },
 });
 
 export default responsiveFontSizes(theme);
