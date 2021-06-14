@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 import FormContainer from "../../Components/FormContainer";
 
 import useStyles from "./styles";
-import registerSvg from "../../Assets/register.svg";
+import registerSvg from "../../assets/register.svg";
 
 const RegistrationScreen = ({ location, history }) => {
   const classes = useStyles();
@@ -168,7 +168,7 @@ const RegistrationScreen = ({ location, history }) => {
                 <Link
                   //   to={redirect ? `/login?redirect=${redirect}` : `/login`}
                   to="/login"
-                  style={{ textDecoration: "none", color: "white" }}
+                  style={{ textDecoration: "none", color:'primary' }}
                 >
                   <Typography variant="body2" component="p">
                     Already have an account?{" "}

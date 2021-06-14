@@ -15,7 +15,7 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 
 import useStyles from "./styles";
-import loginSvg from "../../Assets/login.svg";
+import loginSvg from "../../assets/login.svg";
 import { LinearProgress } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 
@@ -141,7 +141,7 @@ const SignInScreen = ({ location, history }) => {
               <Grid item>
                 <Link
                   to="/register"
-                  style={{ textDecoration: "none", color: "white" }}
+                  style={{ textDecoration: "none", color: "primary" }}
                 >
                   <Typography variant="body2" component="p">
                     Don't have an account?{" "}
