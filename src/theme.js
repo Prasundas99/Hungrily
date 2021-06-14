@@ -3,16 +3,17 @@ import { blue, red } from "@material-ui/core/colors";
 
 const theme = createMuiTheme({
   palette: {
-    type: "dark",
+    //type: "dark",
     primary: {
-      main: blue[300],
+     main: '#6c63ff',
     },
     secondary: {
-      main: red[200],
+      main: '#6c63ff',
     },
   },
   typography: {
     fontFamily: "Lato",
+    color: '#000',
     h1: {
       fontFamily: "Prata",
     },

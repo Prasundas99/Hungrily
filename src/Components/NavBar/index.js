@@ -54,7 +54,7 @@ const Header = () => {
   return (
     <AppBar color="transparent" position="static">
       <Toolbar className={classes.navWrapper}>
-        <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+        <Link to="/" style={{ textDecoration: "none", color: "primary" }}>
           <Typography component="div" variant="h4">
             Hungrily
           </Typography>
@@ -64,7 +64,7 @@ const Header = () => {
             <div className={classes.headerIconWrapper}>
               <Link
                 to="/reciept"
-                style={{ textDecoration: "none", color: "white" }}
+                style={{ textDecoration: "none", color: "primary" }}
               >
                 <Tooltip title="reciept">
                   <IconButton className={classes.navButton}>
@@ -94,7 +94,7 @@ const Header = () => {
                   >
                     <Link
                       to="/profile"
-                      style={{ textDecoration: "none", color: "white" }}
+                      style={{ textDecoration: "none", color: "primary" }}
                     >
                       <MenuItem onClick={handleClose}>Reciept</MenuItem>
                     </Link>
@@ -102,7 +102,7 @@ const Header = () => {
                     <Divider />
                     <Link
                       to="/"
-                      style={{ textDecoration: "none", color: "white" }}
+                      style={{ textDecoration: "none", color: "primary" }}
                     >
                       <MenuItem onClick={logoutUser}>Logout</MenuItem>
                     </Link>
@@ -112,7 +112,7 @@ const Header = () => {
                 <>
                   <Link
                     to="/login"
-                    style={{ textDecoration: "none", color: "white" }}
+                    style={{ textDecoration: "none", color: "primary" }}
                   >
                     <Tooltip title="login">
                       <IconButton className={classes.navButton}>
@@ -142,7 +142,7 @@ const Header = () => {
               open={toggle}
               onClose={() => setToggle(false)}
             >
-              <List>
+              <List className={classes.list}>
                 {data ? (
                   <>
                     <ListItem button>

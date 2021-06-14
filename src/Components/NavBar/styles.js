@@ -21,7 +21,7 @@ export default makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    minWidth: "150px",
+    maxWidth: '150px',
   },
   menuButton: {
     marginRight: theme.spacing(3),
@@ -32,4 +32,7 @@ export default makeStyles((theme) => ({
     fontSize: "1rem",
     padding: "1rem 0",
   },
+  list:{
+    width: 200,
+  }
 }));
