@@ -13,26 +13,23 @@ import theme from './theme';
 import useStyles from './styles';
 
 const App = () => {
-    const classes = useStyles();
+  const classes = useStyles();
 
-    return (
-        <BrowserRouter>
-            <ThemeProvider theme={theme}>
-                <CssBaseline />
-                <NavBar />
-                <Container maxWidth={'lg'}>
-                    <main className={classes.mainWrapper}>
-                        <Route path="/" exact component={HomeScreen} />
-                        <Route path="/login" component={SignIn} />
-                        <Route
-                            path="/register"
-                            component={RegistrationScreen}
-                        />
-                    </main>
-                </Container>
-            </ThemeProvider>
-        </BrowserRouter>
-    );
+  return (
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <NavBar />
+        <Container maxWidth={'lg'}>
+          <main className={classes.mainWrapper}>
+            <Route path="/" exact component={HomeScreen} />
+            <Route path="/login" component={SignIn} />
+            <Route path="/register" component={RegistrationScreen} />
+          </main>
+        </Container>
+      </ThemeProvider>
+    </BrowserRouter>
+  );
 };
 
 export default App;
