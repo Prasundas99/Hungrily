@@ -4,67 +4,70 @@ import { useHistory } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { LinearProgress } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
-
-import * as yup from 'yup';
-import { useFormik } from 'formik';
 
 import { Link } from 'react-router-dom';
 import FormContainer from '../../Components/FormContainer';
 
+import * as yup from 'yup';
+import { useFormik } from 'formik';
+
 import useStyles from './styles';
-import registerSvg from '../../assets/register.svg';
+import loginSvg from '../../Assets/login.svg';
+import { LinearProgress } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 
-//Redux
 import { useDispatch, useSelector } from "react-redux";
-import {register} from "../../redux/action-creators/authActions";
+import {login} from "../../redux/action-creators/authActions";
 
-const RegistrationScreen = ({ location }) => {
+const SignInScreen = ({ location }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
+  // const [loginData, setLoginData] = useState({
+  //   email: "",
+  //   password: "",
+  // });
 
   const validationSchema = yup.object({
-    name: yup.string().required(),
-    email: yup.string().email().required(),
+    email: yup
+      .string()
+      .email('Enter a valid email')
+      .required('Email is required'),
     password: yup
       .string()
       .min(1, 'Password should be of minimum 1 characters length')
       .required('Password is required'),
-    confirmPassword: yup
-      .string()
-      .test('passwords-match', 'Passwords must match', function (value) {
-        return this.parent.password === value;
-      }),
   });
 
   const formik = useFormik({
     initialValues: {
-      name: '',
       email: '',
       password: '',
-      confirmPassword: '',
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      dispatch(register(values.name, values.email, values.password));
-      history.push("/login");
+      dispatch(login(values.email, values.password));
+      history.push("/");
     },
   });
 
-  //   const { registerNewUser } = useAction();
-  //   const { data, error, loading } = useTypedSelector(
-  //     (state) => state.userRegister
-  //   );
+  //   const { signInUser } = useAction();
+  //   const { data, error, loading } = useTypedSelector((state) => state.userLogin);
   //   const redirect = location.search ? location.search.split("=")[1] : "/";
 
   //   useEffect(() => {
   //     if (data) history.push(redirect);
   //   }, [redirect, history, data]);
+
+  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   signInUser(loginData.email, loginData.password);
+  // };
 
   return (
     <>
@@ -74,13 +77,13 @@ const RegistrationScreen = ({ location }) => {
           color="primary"
         />
       )} */}
-      <FormContainer image={registerSvg}>
+      <FormContainer image={loginSvg}>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Register
+            Sign in
           </Typography>
           {/* {error && (
             <Alert
@@ -91,7 +94,6 @@ const RegistrationScreen = ({ location }) => {
               {error}
             </Alert>
           )} */}
-
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -106,28 +108,14 @@ const RegistrationScreen = ({ location }) => {
               margin="normal"
               required
               fullWidth
-              id="name"
-              label="Name"
-              name="name"
-              autoFocus
-              value={formik.values.name}
-              onChange={formik.handleChange}
-              error={formik.touched.name && Boolean(formik.errors.name)}
-              helperText={formik.touched.name && formik.errors.name}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
               id="email"
-              label="Email"
+              label="Email Address"
               name="email"
-              autoFocus
               value={formik.values.email}
               onChange={formik.handleChange}
               error={formik.touched.email && Boolean(formik.errors.email)}
               helperText={formik.touched.email && formik.errors.email}
+              autoFocus
             />
             <TextField
               variant="outlined"
@@ -144,24 +132,9 @@ const RegistrationScreen = ({ location }) => {
               id="password"
               autoComplete="current-password"
             />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="confirmPassword"
-              value={formik.values.confirmPassword}
-              onChange={formik.handleChange}
-              error={
-                formik.touched.confirmPassword &&
-                Boolean(formik.errors.confirmPassword)
-              }
-              helperText={
-                formik.touched.confirmPassword && formik.errors.confirmPassword
-              }
-              label="ConfirmPassword"
-              type="password"
-              id="confirm password"
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
             />
             <Button
               type="submit"
@@ -170,26 +143,25 @@ const RegistrationScreen = ({ location }) => {
               color="primary"
               className={classes.submit}
             >
-              Register
+              Sign In
             </Button>
             <Grid container>
               <Grid item>
                 <Link
-                  //   to={redirect ? `/login?redirect=${redirect}` : `/login`}
-                  to="/login"
+                  to="/register"
                   style={{
                     textDecoration: 'none',
                     color: 'primary',
                   }}
                 >
                   <Typography variant="body2" component="p">
-                    Already have an account?{' '}
+                    Don't have an account?{' '}
                     <span
                       style={{
                         textDecoration: 'underline',
                       }}
                     >
-                      Sign In
+                      Sign Up
                     </span>
                   </Typography>
                 </Link>
@@ -202,4 +174,4 @@ const RegistrationScreen = ({ location }) => {
   );
 };
 
-export default RegistrationScreen;
+export default SignInScreen;
