@@ -1,12 +1,28 @@
 import mongoose from "mongoose";
-import generateToken from "../utils/generateJwt";
 import asyncHandler from "express-async-handler";
 import User from "../model/user.model";
 import foodRequest from "../model/foodRequest.model";
 
 /**
+ * @description get all food requests made by an user
+ * @route GET /api/requests/user
+ * @Access Private
+ * @Role User
+ */
+
+export const getFoodRequests = asyncHandler(async (req, res) => {
+  const foodRequestsByUser = await foodRequest.find({ madeBy: req.user._id });
+
+  if (foodRequestsByUser) {
+    res.status(200).send(foodRequestsByUser);
+  } else {
+    res.status(404).json({ message: "No user found! Please try again later" });
+  }
+});
+
+/**
  * @description create food request
- * @route POST /api/request/user?lng&lat
+ * @route POST /api/requests/user
  * @access Private
  * @Role Volunteer
  */
