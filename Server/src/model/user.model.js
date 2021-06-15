@@ -1,6 +1,18 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
+// Location schema for the user
+const GeoSchema = new mongoose.Schema({
+  type: {
+    type: String,
+    default: "point",
+  },
+  coordinates: {
+    type: [Number],
+    index: "2dsphere",
+  },
+});
+
 const UserSchema = new mongoose.Schema(
   {
     name: {
@@ -27,6 +39,7 @@ const UserSchema = new mongoose.Schema(
     location: {
       type: String,
     },
+    geometry: GeoSchema,
   },
   { timestamps: true }
 );
