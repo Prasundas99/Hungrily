@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -17,63 +19,70 @@ import FormContainer from '../../Components/FormContainer';
 import useStyles from './styles';
 import registerSvg from '../../assets/register.svg';
 
-const RegistrationScreen = ({ location, history }) => {
-    const classes = useStyles();
+//Redux
+import { useDispatch, useSelector } from "react-redux";
+import {register} from "../../redux/action-creators/authActions";
 
-    const validationSchema = yup.object({
-        name: yup.string().required(),
-        email: yup.string().email().required(),
-        password: yup
-            .string()
-            .min(8, 'Password should be of minimum 8 characters length')
-            .required('Password is required'),
-        confirmPassword: yup
-            .string()
-            .test('passwords-match', 'Passwords must match', function (value) {
-                return this.parent.password === value;
-            }),
-    });
+const RegistrationScreen = ({ location }) => {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-    const formik = useFormik({
-        initialValues: {
-            name: '',
-            email: '',
-            password: '',
-            confirmPassword: '',
-        },
-        validationSchema: validationSchema,
-        onSubmit: (values) => {
-            //   registerNewUser(values.name, values.email, values.password);
-        },
-    });
+  const validationSchema = yup.object({
+    name: yup.string().required(),
+    email: yup.string().email().required(),
+    password: yup
+      .string()
+      .min(1, 'Password should be of minimum 1 characters length')
+      .required('Password is required'),
+    confirmPassword: yup
+      .string()
+      .test('passwords-match', 'Passwords must match', function (value) {
+        return this.parent.password === value;
+      }),
+  });
 
-    //   const { registerNewUser } = useAction();
-    //   const { data, error, loading } = useTypedSelector(
-    //     (state) => state.userRegister
-    //   );
-    //   const redirect = location.search ? location.search.split("=")[1] : "/";
+  const formik = useFormik({
+    initialValues: {
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      dispatch(register(values.name, values.email, values.password));
+      history.push("/login");
+    },
+  });
 
-    //   useEffect(() => {
-    //     if (data) history.push(redirect);
-    //   }, [redirect, history, data]);
+  //   const { registerNewUser } = useAction();
+  //   const { data, error, loading } = useTypedSelector(
+  //     (state) => state.userRegister
+  //   );
+  //   const redirect = location.search ? location.search.split("=")[1] : "/";
 
-    return (
-        <>
-            {/* {loading && (
+  //   useEffect(() => {
+  //     if (data) history.push(redirect);
+  //   }, [redirect, history, data]);
+
+  return (
+    <>
+      {/* {loading && (
         <LinearProgress
           style={{ marginTop: "4px", marginBottom: "4px" }}
           color="primary"
         />
       )} */}
-            <FormContainer image={registerSvg}>
-                <div className={classes.paper}>
-                    <Avatar className={classes.avatar}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Register
-                    </Typography>
-                    {/* {error && (
+      <FormContainer image={registerSvg}>
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Register
+          </Typography>
+          {/* {error && (
             <Alert
               style={{ marginTop: "8px", width: "100%" }}
               variant="outlined"
@@ -83,131 +92,114 @@ const RegistrationScreen = ({ location, history }) => {
             </Alert>
           )} */}
 
-                    <form
-                        onSubmit={(e) => {
-                            e.preventDefault();
-                            formik.handleSubmit();
-                        }}
-                        className={classes.form}
-                        noValidate
-                        autoComplete="off"
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              formik.handleSubmit();
+            }}
+            className={classes.form}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="name"
+              label="Name"
+              name="name"
+              autoFocus
+              value={formik.values.name}
+              onChange={formik.handleChange}
+              error={formik.touched.name && Boolean(formik.errors.name)}
+              helperText={formik.touched.name && formik.errors.name}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email"
+              name="email"
+              autoFocus
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="confirmPassword"
+              value={formik.values.confirmPassword}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.confirmPassword &&
+                Boolean(formik.errors.confirmPassword)
+              }
+              helperText={
+                formik.touched.confirmPassword && formik.errors.confirmPassword
+              }
+              label="ConfirmPassword"
+              type="password"
+              id="confirm password"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Register
+            </Button>
+            <Grid container>
+              <Grid item>
+                <Link
+                  //   to={redirect ? `/login?redirect=${redirect}` : `/login`}
+                  to="/login"
+                  style={{
+                    textDecoration: 'none',
+                    color: 'primary',
+                  }}
+                >
+                  <Typography variant="body2" component="p">
+                    Already have an account?{' '}
+                    <span
+                      style={{
+                        textDecoration: 'underline',
+                      }}
                     >
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="name"
-                            label="Name"
-                            name="name"
-                            autoFocus
-                            value={formik.values.name}
-                            onChange={formik.handleChange}
-                            error={
-                                formik.touched.name &&
-                                Boolean(formik.errors.name)
-                            }
-                            helperText={
-                                formik.touched.name && formik.errors.name
-                            }
-                        />
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email"
-                            name="email"
-                            autoFocus
-                            value={formik.values.email}
-                            onChange={formik.handleChange}
-                            error={
-                                formik.touched.email &&
-                                Boolean(formik.errors.email)
-                            }
-                            helperText={
-                                formik.touched.email && formik.errors.email
-                            }
-                        />
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            value={formik.values.password}
-                            onChange={formik.handleChange}
-                            error={
-                                formik.touched.password &&
-                                Boolean(formik.errors.password)
-                            }
-                            helperText={
-                                formik.touched.password &&
-                                formik.errors.password
-                            }
-                            label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                        />
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="confirmPassword"
-                            value={formik.values.confirmPassword}
-                            onChange={formik.handleChange}
-                            error={
-                                formik.touched.confirmPassword &&
-                                Boolean(formik.errors.confirmPassword)
-                            }
-                            helperText={
-                                formik.touched.confirmPassword &&
-                                formik.errors.confirmPassword
-                            }
-                            label="ConfirmPassword"
-                            type="password"
-                            id="confirm password"
-                        />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            className={classes.submit}
-                        >
-                            Register
-                        </Button>
-                        <Grid container>
-                            <Grid item>
-                                <Link
-                                    //   to={redirect ? `/login?redirect=${redirect}` : `/login`}
-                                    to="/login"
-                                    style={{
-                                        textDecoration: 'none',
-                                        color: 'primary',
-                                    }}
-                                >
-                                    <Typography variant="body2" component="p">
-                                        Already have an account?{' '}
-                                        <span
-                                            style={{
-                                                textDecoration: 'underline',
-                                            }}
-                                        >
-                                            Sign In
-                                        </span>
-                                    </Typography>
-                                </Link>
-                            </Grid>
-                        </Grid>
-                    </form>
-                </div>
-            </FormContainer>
-        </>
-    );
+                      Sign In
+                    </span>
+                  </Typography>
+                </Link>
+              </Grid>
+            </Grid>
+          </form>
+        </div>
+      </FormContainer>
+    </>
+  );
 };
 
 export default RegistrationScreen;

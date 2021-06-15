@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -19,65 +21,71 @@ import loginSvg from '../../assets/login.svg';
 import { LinearProgress } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 
-const SignInScreen = ({ location, history }) => {
-    const classes = useStyles();
-    // const [loginData, setLoginData] = useState({
-    //   email: "",
-    //   password: "",
-    // });
+import { useDispatch, useSelector } from "react-redux";
+import {login} from "../../redux/action-creators/authActions";
 
-    const validationSchema = yup.object({
-        email: yup
-            .string()
-            .email('Enter a valid email')
-            .required('Email is required'),
-        password: yup
-            .string()
-            .min(8, 'Password should be of minimum 8 characters length')
-            .required('Password is required'),
-    });
+const SignInScreen = ({ location }) => {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
+  // const [loginData, setLoginData] = useState({
+  //   email: "",
+  //   password: "",
+  // });
 
-    const formik = useFormik({
-        initialValues: {
-            email: '',
-            password: '',
-        },
-        validationSchema: validationSchema,
-        onSubmit: (values) => {
-            //   signInUser(values.email, values.password);
-        },
-    });
+  const validationSchema = yup.object({
+    email: yup
+      .string()
+      .email('Enter a valid email')
+      .required('Email is required'),
+    password: yup
+      .string()
+      .min(1, 'Password should be of minimum 1 characters length')
+      .required('Password is required'),
+  });
 
-    //   const { signInUser } = useAction();
-    //   const { data, error, loading } = useTypedSelector((state) => state.userLogin);
-    //   const redirect = location.search ? location.search.split("=")[1] : "/";
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      dispatch(login(values.email, values.password));
+      history.push("/");
+    },
+  });
 
-    //   useEffect(() => {
-    //     if (data) history.push(redirect);
-    //   }, [redirect, history, data]);
+  //   const { signInUser } = useAction();
+  //   const { data, error, loading } = useTypedSelector((state) => state.userLogin);
+  //   const redirect = location.search ? location.search.split("=")[1] : "/";
 
-    // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    //   e.preventDefault();
-    //   signInUser(loginData.email, loginData.password);
-    // };
+  //   useEffect(() => {
+  //     if (data) history.push(redirect);
+  //   }, [redirect, history, data]);
 
-    return (
-        <>
-            {/* {loading && (
+  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   signInUser(loginData.email, loginData.password);
+  // };
+
+  return (
+    <>
+      {/* {loading && (
         <LinearProgress
           style={{ marginTop: "4px", marginBottom: "4px" }}
           color="primary"
         />
       )} */}
-            <FormContainer image={loginSvg}>
-                <div className={classes.paper}>
-                    <Avatar className={classes.avatar}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign in
-                    </Typography>
-                    {/* {error && (
+      <FormContainer image={loginSvg}>
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          {/* {error && (
             <Alert
               style={{ marginTop: "8px", width: "100%" }}
               variant="outlined"
@@ -86,97 +94,84 @@ const SignInScreen = ({ location, history }) => {
               {error}
             </Alert>
           )} */}
-                    <form
-                        onSubmit={(e) => {
-                            e.preventDefault();
-                            formik.handleSubmit();
-                        }}
-                        className={classes.form}
-                        noValidate
-                        autoComplete="off"
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              formik.handleSubmit();
+            }}
+            className={classes.form}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
+              autoFocus
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Sign In
+            </Button>
+            <Grid container>
+              <Grid item>
+                <Link
+                  to="/register"
+                  style={{
+                    textDecoration: 'none',
+                    color: 'primary',
+                  }}
+                >
+                  <Typography variant="body2" component="p">
+                    Don't have an account?{' '}
+                    <span
+                      style={{
+                        textDecoration: 'underline',
+                      }}
                     >
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            value={formik.values.email}
-                            onChange={formik.handleChange}
-                            error={
-                                formik.touched.email &&
-                                Boolean(formik.errors.email)
-                            }
-                            helperText={
-                                formik.touched.email && formik.errors.email
-                            }
-                            autoFocus
-                        />
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            value={formik.values.password}
-                            onChange={formik.handleChange}
-                            error={
-                                formik.touched.password &&
-                                Boolean(formik.errors.password)
-                            }
-                            helperText={
-                                formik.touched.password &&
-                                formik.errors.password
-                            }
-                            label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Checkbox value="remember" color="primary" />
-                            }
-                            label="Remember me"
-                        />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            className={classes.submit}
-                        >
-                            Sign In
-                        </Button>
-                        <Grid container>
-                            <Grid item>
-                                <Link
-                                    to="/register"
-                                    style={{
-                                        textDecoration: 'none',
-                                        color: 'primary',
-                                    }}
-                                >
-                                    <Typography variant="body2" component="p">
-                                        Don't have an account?{' '}
-                                        <span
-                                            style={{
-                                                textDecoration: 'underline',
-                                            }}
-                                        >
-                                            Sign Up
-                                        </span>
-                                    </Typography>
-                                </Link>
-                            </Grid>
-                        </Grid>
-                    </form>
-                </div>
-            </FormContainer>
-        </>
-    );
+                      Sign Up
+                    </span>
+                  </Typography>
+                </Link>
+              </Grid>
+            </Grid>
+          </form>
+        </div>
+      </FormContainer>
+    </>
+  );
 };
 
 export default SignInScreen;
