@@ -10,6 +10,7 @@ import HomeScreen from './Screens/Home/HomeScreen';
 import RegistrationScreen from './Screens/Register/RegisterScreen';
 import volunteerScreen from './Screens/Volunteer/volunteerScreen';
 import Chat from './Components/Chat';
+import VolunteerScreen from './Screens/Volunteer/VolunteerScreen';
 
 import theme from './theme';
 
@@ -41,6 +42,7 @@ const App = () => {
       store.dispatch(createSession());
     }
   });
+
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
@@ -53,6 +55,7 @@ const App = () => {
             <Route path="/register" component={RegistrationScreen} />
             <Route path="/volunteer/profile" component={volunteerScreen} />
             <Route path="/chat" component={Chat} />
+            <Route path="/volunteer/profile" component={VolunteerScreen} />
           </main>
         </Container>
       </ThemeProvider>
