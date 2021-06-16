@@ -11,15 +11,16 @@ import foodRequest from "../model/foodRequest.model";
  */
 
 export const getRecievedFoodRequests = asyncHandler(async (req, res) => {
-  const foodRequestRecievedByVolunteers = await foodRequest.find({
-    recievedBy: req.user._id,
-  });
-
-  if (foodRequestRecievedByVolunteers) {
-    res.status(200).send(foodRequestRecievedByVolunteers);
-  } else {
-    res.status(404).json({ message: "No user found! Please try again later" });
-  }
+  foodRequest
+    .find({ recievedBy: req.user._id })
+    .populate("madeBy", { password: 0 })
+    .exec(function (err, foodReq) {
+      if (err) {
+        res.status(404);
+        throw new Error("Oops, something went wrong");
+      }
+      res.status(200).send(foodReq);
+    });
 });
 
 /**
@@ -30,13 +31,16 @@ export const getRecievedFoodRequests = asyncHandler(async (req, res) => {
  */
 
 export const getFoodRequests = asyncHandler(async (req, res) => {
-  const foodRequestsByUser = await foodRequest.find({ madeBy: req.user._id });
-
-  if (foodRequestsByUser) {
-    res.status(200).send(foodRequestsByUser);
-  } else {
-    res.status(404).json({ message: "No food Requests found" });
-  }
+  foodRequest
+    .find({ madeBy: req.user._id })
+    .populate("recievedBy", { password: 0 })
+    .exec(function (err, foodReq) {
+      if (err) {
+        res.status(404);
+        throw new Error("Oops, something went wrong");
+      }
+      res.status(200).send(foodReq);
+    });
 });
 
 /**
