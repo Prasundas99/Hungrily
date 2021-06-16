@@ -5,6 +5,7 @@ import HeroImage from '../../../../Assets/a.png';
 import { useStyles } from './style';
 
 const HeroSection = () => {
+
   const classes = useStyles();
   const history = useHistory();
 
@@ -45,6 +46,7 @@ const HeroSection = () => {
         <img className={classes.imageIllustration} src={HeroImage} />
       </Grid>
     </Grid>
+
   );
 };
 
