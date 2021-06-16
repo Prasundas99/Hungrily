@@ -8,9 +8,9 @@ import NavBar from './Components/NavBar/';
 import SignIn from './Screens/SignIn/SignIn';
 import HomeScreen from './Screens/Home/HomeScreen';
 import RegistrationScreen from './Screens/Register/RegisterScreen';
-import volunteerScreen from './Screens/Volunteer/volunteerScreen';
-import Chat from './Components/Chat';
 import VolunteerScreen from './Screens/Volunteer/VolunteerScreen';
+import Chat from './Components/Chat';
+
 
 import theme from './theme';
 
@@ -53,7 +53,6 @@ const App = () => {
             <Route path="/" exact component={HomeScreen} />
             <Route path="/login" component={SignIn} />
             <Route path="/register" component={RegistrationScreen} />
-            <Route path="/volunteer/profile" component={volunteerScreen} />
             <Route path="/chat" component={Chat} />
             <Route path="/volunteer/profile" component={VolunteerScreen} />
           </main>

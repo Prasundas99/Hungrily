@@ -17,7 +17,7 @@ const HeroSection = () => {
 
         </Typography>
         <Typography className={classes.leftPara} variant="h5" component="p">
-          Welcome to Hungrily - an application focusing on providing food to the needful people with the help of volinteers helping in this crisis with foods <br />
+          Welcome to Hungrily - an application focusing on providing food to the needful people with the help of volunteer helping in this crisis with foods <br />
           <br />
         </Typography>
         <Link to="/Register" style={{ textDecoration: 'none', color: '#fff' }}>

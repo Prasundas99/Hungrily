@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server/src \" \"npm run client \" \"npm run serverforchat \""
+  },
+
+
+  "dependencies": {
+    "concurrently": "^6.2.0"
+  }
+}

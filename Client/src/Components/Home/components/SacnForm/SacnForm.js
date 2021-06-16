@@ -41,10 +41,10 @@ import {
               variant="h4"
               component="h2"
             >
-            Who are our Volinteers?
+            Who are our Volunteer?
             </Typography>
 <Typography>
-    Volinteers are the selfless people who are involved with us to provide food and other nessicity needs to people who need it.
+    Volunteer are the selfless people who are involved with us to provide food and other nessicity needs to people who need it.
     <p>What to become our Volinteer?</p>
 <Button color='primary' variant="contained">Register To become a Volinteer</Button>
 </Typography>
