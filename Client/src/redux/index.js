@@ -5,17 +5,23 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './reducers';
 
 //GET user info from localstorage
-const userInfoFromLocalstorage = JSON.parse(localStorage.getItem('userInfo'));
+const localLoginData = localStorage.getItem('userData')
+  ? JSON.parse(localStorage.getItem('userData'))
+  : null;
 
 const initialState = {
-    auth: { userInfo: userInfoFromLocalstorage },
+  userLogin: {
+    loading: false,
+    error: null,
+    data: localLoginData,
+  },
 };
 
 const middlewares = [thunk];
 const store = createStore(
-    rootReducer,
-    initialState,
-    composeWithDevTools(applyMiddleware(...middlewares))
+  rootReducer,
+  initialState,
+  composeWithDevTools(applyMiddleware(...middlewares))
 );
 
 export default store;

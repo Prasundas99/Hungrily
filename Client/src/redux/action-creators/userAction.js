@@ -2,6 +2,7 @@ import {
   LOGIN_USER,
   LOGIN_USER_FAILURE,
   LOGIN_USER_SUCCESS,
+  LOGOUT_USER,
 } from '../action-types/';
 
 import { loginUser } from '../../api/user';
@@ -30,7 +31,8 @@ export const signInUser = (email, password) => async (dispatch) => {
   }
 };
 
-// export const signOutUser = () => async (dispatch) => {
-//   localStorage.removeItem('userData');
-//   dispatch({ type: LOGOUT_USER });
-// };
+export const signOutUser = () => async (dispatch) => {
+  // logout by removing localStorage jwt
+  localStorage.removeItem('userData');
+  dispatch({ type: LOGOUT_USER });
+};
