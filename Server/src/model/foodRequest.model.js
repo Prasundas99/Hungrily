@@ -14,6 +14,7 @@ const foodRequestSchema = new mongoose.Schema(
     },
     preference: {
       type: String,
+      default: "veg",
       required: true,
     },
     isDelivered: {
