@@ -63,7 +63,13 @@ const Header = () => {
           <>
             <div className={classes.headerIconWrapper}>
               <Link
-                to="/login?redirect=reciept"
+                to={`/login?redirect=${
+                  data
+                    ? data.isVolunteer
+                      ? '/volunteer/profile'
+                      : '/reciept'
+                    : '/reciept'
+                }`}
                 style={{
                   textDecoration: 'none',
                   color: 'primary',
@@ -96,7 +102,9 @@ const Header = () => {
                     onClose={handleClose}
                   >
                     <Link
-                      to="/reciept"
+                      to={`/login?redirect=${
+                        data.isVolunteer ? '/volunteer/profile' : '/reciept'
+                      }`}
                       style={{
                         textDecoration: 'none',
                         color: 'primary',
