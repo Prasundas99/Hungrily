@@ -4,6 +4,25 @@ import User from "../model/user.model";
 import foodRequest from "../model/foodRequest.model";
 
 /**
+ * @description get all food requests recieved by a Volunteer
+ * @route GET /api/requests/volunteer
+ * @Access Private
+ * @Role Volunteer
+ */
+
+export const getRecievedFoodRequests = asyncHandler(async (req, res) => {
+  const foodRequestRecievedByVolunteers = await foodRequest.find({
+    recievedBy: req.user._id,
+  });
+
+  if (foodRequestRecievedByVolunteers) {
+    res.status(200).send(foodRequestRecievedByVolunteers);
+  } else {
+    res.status(404).json({ message: "No user found! Please try again later" });
+  }
+});
+
+/**
  * @description get all food requests made by an user
  * @route GET /api/requests/user
  * @Access Private
@@ -16,7 +35,7 @@ export const getFoodRequests = asyncHandler(async (req, res) => {
   if (foodRequestsByUser) {
     res.status(200).send(foodRequestsByUser);
   } else {
-    res.status(404).json({ message: "No user found! Please try again later" });
+    res.status(404).json({ message: "No food Requests found" });
   }
 });
 

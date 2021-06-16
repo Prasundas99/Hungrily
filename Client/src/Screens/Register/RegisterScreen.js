@@ -20,8 +20,8 @@ import useStyles from './styles';
 import registerSvg from '../../Assets/register.svg';
 
 //Redux
-import { useDispatch, useSelector } from "react-redux";
-import {register} from "../../redux/action-creators/authActions";
+import { useDispatch, useSelector } from 'react-redux';
+// import {register} from "../../redux/action-creators/authActions";
 
 const RegistrationScreen = ({ location }) => {
   const classes = useStyles();
@@ -51,8 +51,8 @@ const RegistrationScreen = ({ location }) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      dispatch(register(values.name, values.email, values.password));
-      history.push("/login");
+      // dispatch(register(values.name, values.email, values.password));
+      history.push('/login');
     },
   });
 
