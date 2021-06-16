@@ -21,6 +21,7 @@ export const authUser = asyncHandler(async (req, res) => {
       email: user.email,
       isVolunteer: user.isVolunteer,
       location: user.location,
+      geometry: user.geometry,
       token: generateToken(user._id),
     });
   } else {
@@ -48,6 +49,7 @@ export const createUser = asyncHandler(async (req, res) => {
     email,
     password,
     location,
+    geometry,
   });
 
   // send auth token as well
@@ -59,6 +61,7 @@ export const createUser = asyncHandler(async (req, res) => {
       email: newUser.email,
       isVolunteer: newUser.isVolunteer,
       location: newUser.location,
+      geometry: newUser.geometry,
       token: generateToken(newUser._id),
     });
   } else {
@@ -81,6 +84,7 @@ export const getUserProfile = asyncHandler(async (req, res) => {
       email: user.email,
       location: user.location,
       isVolunteer: user.isVolunteer,
+      geometry: user.geometry,
     });
   } else {
     res.status(404);
@@ -102,6 +106,7 @@ export const updateUserProfile = asyncHandler(async (req, res) => {
     user.email = req.body.email || user.email;
     user.isVolunteer = req.body.isVolunteer || user.isVolunteer;
     user.location = req.body.location || user.location;
+    user.geometry = req.body.geometry || user.geometry;
     if (req.body.password) {
       user.password = req.body.password;
     }
@@ -112,6 +117,7 @@ export const updateUserProfile = asyncHandler(async (req, res) => {
       email: updatedUser.email,
       isVolunteer: updatedUser.isVolunteer,
       location: updatedUser.location,
+      geometry: updatedUser.geometry,
       token: generateToken(updatedUser._id),
     });
   } else {

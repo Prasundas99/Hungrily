@@ -21,17 +21,14 @@ import loginSvg from '../../Assets/login.svg';
 import { LinearProgress } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 
-import { useDispatch, useSelector } from "react-redux";
-import {login} from "../../redux/action-creators/authActions";
+// Redux Stuff
+import { useDispatch, useSelector } from 'react-redux';
+import { signInUser } from '../../redux/action-creators';
 
 const SignInScreen = ({ location }) => {
   const classes = useStyles();
-  const dispatch = useDispatch();
   const history = useHistory();
-  // const [loginData, setLoginData] = useState({
-  //   email: "",
-  //   password: "",
-  // });
+  const dispatch = useDispatch();
 
   const validationSchema = yup.object({
     email: yup
@@ -51,32 +48,25 @@ const SignInScreen = ({ location }) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      dispatch(login(values.email, values.password));
-      history.push("/");
+      dispatch(signInUser(values.email, values.password));
     },
   });
 
-  //   const { signInUser } = useAction();
-  //   const { data, error, loading } = useTypedSelector((state) => state.userLogin);
-  //   const redirect = location.search ? location.search.split("=")[1] : "/";
+  const { data, error, loading } = useSelector((state) => state.userLogin);
+  const redirect = location.search ? location.search.split('=')[1] : '/';
 
-  //   useEffect(() => {
-  //     if (data) history.push(redirect);
-  //   }, [redirect, history, data]);
-
-  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   signInUser(loginData.email, loginData.password);
-  // };
+  useEffect(() => {
+    if (data) history.push(redirect);
+  }, [redirect, history, data]);
 
   return (
     <>
-      {/* {loading && (
+      {loading && (
         <LinearProgress
-          style={{ marginTop: "4px", marginBottom: "4px" }}
+          style={{ marginTop: '4px', marginBottom: '4px' }}
           color="primary"
         />
-      )} */}
+      )}
       <FormContainer image={loginSvg}>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
@@ -85,15 +75,15 @@ const SignInScreen = ({ location }) => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          {/* {error && (
+          {error && (
             <Alert
-              style={{ marginTop: "8px", width: "100%" }}
+              style={{ marginTop: '8px', width: '100%' }}
               variant="outlined"
               severity="error"
             >
               {error}
             </Alert>
-          )} */}
+          )}
           <form
             onSubmit={(e) => {
               e.preventDefault();
