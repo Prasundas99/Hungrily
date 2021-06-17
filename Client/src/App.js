@@ -23,6 +23,7 @@ import { createSession } from "./redux/action-creators/watsonAction";
 
 // Import axios
 import axios from "axios";
+import { NightsStay } from '@material-ui/icons';
 
 // TODO: Remove session_id from localstorage when app is closed
 if (localStorage.session) {
@@ -37,7 +38,7 @@ const App = () => {
   const classes = useStyles();
   useEffect(() => {
     // Check if there session
-    if (!localStorage.session) {
+    if (!localStorage.session) { 
       // Create
       store.dispatch(createSession());
     }
