@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -9,28 +8,37 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { LinearProgress } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 
-import { Link } from 'react-router-dom';
-import FormContainer from '../../Components/FormContainer';
+import { Link, useHistory } from 'react-router-dom';
 
+import FormContainer from '../../Components/FormContainer';
 import useStyles from './styles';
 import registerSvg from '../../Assets/register.svg';
 
 //Redux
 import { useDispatch, useSelector } from 'react-redux';
-// import {register} from "../../redux/action-creators/authActions";
+import { registerNewUser } from '../../redux/action-creators';
 
 const RegistrationScreen = ({ location }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const [open, setOpen] = useState(false);
+
   const validationSchema = yup.object({
     name: yup.string().required(),
     email: yup.string().email().required(),
+    userLocation: yup.string().required(),
+    geometry: yup.object().required(),
     password: yup
       .string()
       .min(1, 'Password should be of minimum 1 characters length')
@@ -46,34 +54,64 @@ const RegistrationScreen = ({ location }) => {
     initialValues: {
       name: '',
       email: '',
+      userLocation: '',
+      geometry: {},
       password: '',
       confirmPassword: '',
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      // dispatch(register(values.name, values.email, values.password));
-      history.push('/login');
+      dispatch(
+        registerNewUser(
+          values.name,
+          values.email,
+          values.password,
+          values.geometry,
+          values.userLocation
+        )
+      );
+      console.log(values);
+      // history.push('/login');
     },
   });
 
-  //   const { registerNewUser } = useAction();
-  //   const { data, error, loading } = useTypedSelector(
-  //     (state) => state.userRegister
-  //   );
-  //   const redirect = location.search ? location.search.split("=")[1] : "/";
+  const getLocation = () => {
+    // check if user's browser supports Navigator.geolocation
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function (success) {
+          formik.setFieldValue('geometry', {
+            type: 'point',
+            coordinates: [success.coords.longitude, success.coords.latitude],
+          });
 
-  //   useEffect(() => {
-  //     if (data) history.push(redirect);
-  //   }, [redirect, history, data]);
+          console.log(formik);
+        },
+        function (error) {
+          setOpen(true);
+          console.log(error);
+        }
+      );
+    } else {
+      setOpen(true);
+    }
+  };
+
+  const { data, error, loading } = useSelector((state) => state.userRegister);
+  const redirect = location.search ? location.search.split('=')[1] : '/';
+
+  useEffect(() => {
+    if (data) history.push(redirect);
+  }, [redirect, history, data]);
 
   return (
     <>
-      {/* {loading && (
+      {loading && (
         <LinearProgress
-          style={{ marginTop: "4px", marginBottom: "4px" }}
+          style={{ marginTop: '4px', marginBottom: '4px' }}
           color="primary"
         />
-      )} */}
+      )}
       <FormContainer image={registerSvg}>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
@@ -82,15 +120,15 @@ const RegistrationScreen = ({ location }) => {
           <Typography component="h1" variant="h5">
             Register
           </Typography>
-          {/* {error && (
+          {error && (
             <Alert
-              style={{ marginTop: "8px", width: "100%" }}
+              style={{ marginTop: '8px', width: '100%' }}
               variant="outlined"
               severity="error"
             >
               {error}
             </Alert>
-          )} */}
+          )}
 
           <form
             onSubmit={(e) => {
@@ -163,6 +201,54 @@ const RegistrationScreen = ({ location }) => {
               type="password"
               id="confirm password"
             />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="userLocation"
+              value={formik.values.userLocation}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.userLocation &&
+                Boolean(formik.errors.userLocation)
+              }
+              helperText={
+                formik.touched.userLocation && formik.errors.userLocation
+              }
+              label="Address"
+              type="text"
+              id="userLocation"
+            />
+
+            <TextField
+              variant="outlined"
+              style={{ display: 'none' }}
+              margin="normal"
+              required
+              fullWidth
+              name="geometry"
+              value={formik.values.geometry}
+              onChange={formik.handleChange}
+              error={formik.touched.geometry && Boolean(formik.errors.geometry)}
+              helperText={formik.touched.geometry && formik.errors.geometry}
+              label="geometry"
+              type="text"
+              id="geometry"
+            />
+
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              style={{ width: '25%' }}
+              className={classes.submit}
+              onClick={getLocation}
+            >
+              Provide your location
+            </Button>
+            <Grid container></Grid>
+
             <Button
               type="submit"
               fullWidth
@@ -175,8 +261,7 @@ const RegistrationScreen = ({ location }) => {
             <Grid container>
               <Grid item>
                 <Link
-                  //   to={redirect ? `/login?redirect=${redirect}` : `/login`}
-                  to="/login"
+                  to={redirect ? `/login?redirect=${redirect}` : `/login`}
                   style={{
                     textDecoration: 'none',
                     color: 'primary',
@@ -192,6 +277,37 @@ const RegistrationScreen = ({ location }) => {
                       Sign In
                     </span>
                   </Typography>
+                  <div>
+                    <Dialog
+                      open={open}
+                      onClose={() => {
+                        setOpen(false);
+                      }}
+                      aria-labelledby="alert-dialog-title"
+                      aria-describedby="alert-dialog-description"
+                    >
+                      <DialogTitle id="alert-dialog-title">
+                        {'We need your location for us to help you'}
+                      </DialogTitle>
+                      <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                          Let our application determine location. Your privacy
+                          is our top concern. It will not be shared to external
+                          services in any way.
+                        </DialogContentText>
+                      </DialogContent>
+                      <DialogActions>
+                        <Button
+                          onClick={() => {
+                            setOpen(false);
+                          }}
+                          color="primary"
+                        >
+                          I understand
+                        </Button>
+                      </DialogActions>
+                    </Dialog>
+                  </div>
                 </Link>
               </Grid>
             </Grid>

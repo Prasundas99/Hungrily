@@ -1,0 +1,154 @@
+body {
+    font-family: 'Helvetica', Arial, sans-serif;
+    font-size: 14px;
+    margin: 0;
+    line-height: 20px;
+}
+
+
+/* Prevent zoom effect on mobile for inputs */
+input[type='text'],
+input[type='number'],
+textarea {
+  font-size: 16px;
+}
+
+#app-container {
+    margin: 0 auto;
+    position: relative;
+    height: 100vh;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 420px;
+}
+
+::-webkit-scrollbar {
+    display: none;
+    }
+
+.convo-container {
+    height: 100%;
+    /* width: 95%; */
+    max-width: 100%;
+    max-height: 80vh;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    overflow: visible;
+}
+
+.input-container {
+    width: 100%;
+    background: #fff;
+    max-width: 420px;
+    position: fixed;
+    bottom: 0;
+    left: auto;
+    right: auto;
+    box-sizing: border-box;
+    padding: 10px;
+}
+.input-container input {
+    width: 100%;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #cecece;
+    box-sizing: border-box;
+}
+
+
+.chat-bubble {
+    background: rgb(25, 101, 182);
+    padding: 8px 15px;
+    color: #fff;
+    /* width: 93%; */
+    box-sizing: border-box;
+    
+}
+
+/* USER chat bubble */
+.user-message-container {
+    display: flex;
+    justify-content: flex-end;
+    animation: revealup .5s 0s cubic-bezier(0,.57,.81,1.01) forwards;
+}
+
+.chat-bubble.user {
+    background: #5f6fee;
+    border-radius: 20px 20px 3px 20px;
+    margin: 20px 0;
+}
+
+/* BOT chat bubble */
+.chat-bubble.bot {
+    box-shadow: 1px 1px 1px 2px #00000012;
+    background: #fff;
+    color: #5a5a5a;
+    margin: 0;
+    opacity: 1;
+    border-radius: 3px 20px 20px 20px;
+}
+
+.bot-message-container {
+    display: flex;
+    margin: 10px 0;
+    animation: revealup .5s .2s cubic-bezier(0,.57,.81,1.01) forwards;
+}
+
+    .bot-message-container > div:first-child {
+        margin-right: 10px;
+        width: 40px;
+    }
+
+    /* .bot-message-container > div:nth-child(2) {
+        flex: 0 1 auto;
+    } */
+
+.bot-message-container img {
+    border-radius: 50%;
+    max-width: 30px;
+}
+
+
+/* General bubble styles for both USER & BOT */
+.hidden {
+    opacity: 0;
+}
+
+.show {
+    opacity: 1;
+}
+
+#success-overlay {
+    background: #0074ae;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    display: none;
+}
+
+#success-overlay.active {
+    display: block;
+}
+
+#pizza-timer {
+    font-size: 40px;
+}
+
+/* ANIMATIONS */
+@keyframes revealup {
+    from {
+        opacity: 0;
+        margin-top: 20px;
+    }
+    to { 
+        opacity: 1;
+        margin-top: 0;
+    }
+}

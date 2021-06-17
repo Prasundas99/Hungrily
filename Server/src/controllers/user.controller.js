@@ -36,7 +36,7 @@ export const authUser = asyncHandler(async (req, res) => {
  * @public
  */
 export const createUser = asyncHandler(async (req, res) => {
-  const { name, password, email } = req.body;
+  const { name, password, email, userLocation, geometry } = req.body;
   const user = await User.findOne({ email: email });
 
   if (user) {
@@ -48,7 +48,7 @@ export const createUser = asyncHandler(async (req, res) => {
     name,
     email,
     password,
-    location,
+    location: userLocation,
     geometry,
   });
 
