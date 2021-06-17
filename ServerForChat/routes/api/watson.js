@@ -30,7 +30,7 @@ router.get("/session", async (req, res) => {
 
     console.log(session);
 
-    res.json(session.result);
+    res.status(200).json(session.result);
 
     // If fail
   } catch (err) {
