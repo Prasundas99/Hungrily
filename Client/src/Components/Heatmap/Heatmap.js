@@ -6,23 +6,25 @@ import { heatmapLayer } from './map-style.js';
 
 const Heatmap = () => {
   const [viewport, setViewport] = useState({
-    latitude: 40,
-    longitude: -100,
+    latitude: 61,
+    longitude: 208,
     zoom: 3,
     bearing: 0,
     pitch: 0,
   });
 
-  const [earthquakes, setEarthQuakes] = useState(null);
+  const [foodRequestDistribution, setFoodRequestDistribution] = useState(null);
 
   useEffect(() => {
     /* global fetch */
     fetch('https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson')
+      // fetch('http://localhost:5000/api/heatmap/usermap')
       .then((resp) => resp.json())
       .then((json) => {
         // Note: In a real application you would do a validation of JSON data before doing anything with it,
         // but for demonstration purposes we ingore this part here and just trying to select needed data...
-        setEarthQuakes(json);
+        console.log(json);
+        setFoodRequestDistribution(json);
       });
   }, []);
 
@@ -39,8 +41,8 @@ const Heatmap = () => {
         onViewportChange={setViewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
       >
-        {earthquakes && (
-          <Source type="geojson" data={earthquakes}>
+        {foodRequestDistribution && (
+          <Source type="geojson" data={foodRequestDistribution}>
             <Layer {...heatmapLayer} />
           </Source>
         )}
