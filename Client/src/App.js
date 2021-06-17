@@ -53,10 +53,10 @@ const App = () => {
             <Route path="/" exact component={HomeScreen} />
             <Route path="/login" component={SignIn} />
             <Route path="/register" component={RegistrationScreen} />
-            <Route path="/chat" component={Chat} />
             <Route path="/volunteer/profile" component={VolunteerScreen} />
           </main>
         </Container>
+        <Chat/>
       </ThemeProvider>
     </BrowserRouter>
   );
