@@ -152,3 +152,36 @@ textarea {
         margin-top: 0;
     }
 }
+
+
+.rcw-conversation-container > .rcw-header {
+    background-color: #5146af;
+  }
+   
+  .rcw-message > .rcw-response {
+    background-color: black;
+    color: white;
+  }
+
+  .rcw-client .rcw-message-text{
+    background-color: #5146af;
+    color: white;
+  }
+
+  .rcw-conversation-container .rcw-close-button{
+    background-color: #5146af;
+  }
+  @media screen and (max-width: 800px){
+.rcw-conversation-container .rcw-close-button {
+    background-color: #5146af;
+    border: 0;
+    display: block;
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    width: 40px;
+}
+}
+.rcw-launcher {
+    background-color: #5146af;
+}

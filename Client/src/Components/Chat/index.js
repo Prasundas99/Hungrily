@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 //Chat modal import
 import { Widget, addResponseMessage } from 'react-chat-widget';
 import 'react-chat-widget/lib/styles.css';
+import './style.css'
 //  Import action
 import {
   userMessage,
@@ -52,7 +53,11 @@ const Chat = () => {
 
   return (
     <div>
-      <Widget ref={widgetRef} handleNewUserMessage={handleNewUserMessage} />
+      <Widget 
+      ref={widgetRef}
+       handleNewUserMessage={handleNewUserMessage}
+       title="Ask Hungrily"
+       subtitle="" />
       <div className="convo-container">
         <div class="historyContainer">
           {lastIndex.map(
