@@ -47,13 +47,14 @@ export const getFoodRequests = asyncHandler(async (req, res) => {
  * @description create food request
  * @route POST /api/requests/user
  * @access Private
- * @Role Volunteer
+ * @Role USER
  */
 
 export const createFoodRequest = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
   console.log("user", user);
+  console.log("body of request", req.body);
   if (user) {
     // find all volunteers within 2km radius of the user
     const volunteerWithinRange = await User.aggregate([

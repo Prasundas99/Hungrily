@@ -1,67 +1,73 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+//Chat modal import
+import { Widget, addResponseMessage } from 'react-chat-widget';
+import 'react-chat-widget/lib/styles.css';
+import './style.css'
 //  Import action
-import { userMessage, sendMessage } from "../../redux/action-creators/watsonAction";
+import {
+  userMessage,
+  sendMessage,
+} from '../../redux/action-creators/watsonAction';
 
-import "./style.css";
+import { createUserFoodRequest } from '../../redux/action-creators/';
 
 const Chat = () => {
   // Handle Users Message
-  const [message, setMessage] = useState("");
   const endOfMessages = useRef(null);
+  const widgetRef = useRef(null);
   const dispatch = useDispatch();
+  const userInputPreference = 'veg';
 
   const { messages: fetchMessages } = useSelector((state) => state.watson);
+  const lastIndex = fetchMessages.slice(-1);
 
-  const scrollToBottom = () => {
-    endOfMessages.current.scrollIntoView({ behavior: "smooth" });
-  };
+  /**MIND THE EXTRA SPACE (POTENTIAL BUG ELEMENT) */
 
-  useEffect(scrollToBottom, [fetchMessages]);
-
-  //  Function that handles user submission
-  const handleClick = async (e) => {
-    const code = e.keyCode || e.which;
-
-    if (code === 13) {
-      // console.log(message);
-      dispatch(userMessage(message));
-      dispatch(sendMessage(message));
-      setMessage("");
+  useEffect(() => {
+    if (widgetRef) {
+      if (fetchMessages) {
+        if (
+          lastIndex.length > 0 &&
+          lastIndex[0].message === 'We have received your request. A volunteer shall be assigned shortly. please navigate to your receipts now. Thank you.'
+        ) {
+          dispatch(createUserFoodRequest({ preference: userInputPreference }));
+        }
+      }
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, fetchMessages]);
+
+  // if (lastIndex) {
+  //   console.log('last index logging');
+  // }
+
+  const handleNewUserMessage = (newMessage) => {
+    console.log(`New message incoming! ${newMessage}`);
+    // Now send the message throught the backend API
+    dispatch(userMessage(newMessage));
+    dispatch(sendMessage(newMessage));
   };
-
-  const click = () =>{
-
-  }
 
   return (
-    <div className="body" id="app-container">
+    <div>
+      <Widget 
+      ref={widgetRef}
+       handleNewUserMessage={handleNewUserMessage}
+       title="Ask Hungrily"
+       subtitle="" />
       <div className="convo-container">
-        <h1>Chatty the Chatbot</h1>
-        {/* Handle Messages */}
         <div class="historyContainer">
-          {fetchMessages.length === 0
-            ? "Enter Your Message to start to chat"
-            : fetchMessages.map((msg) => msg.type === "user"  ? (
-                <div className="user-message-container">{msg.message}</div> ) : (
-
-                <div className="bot-message-container">
-                  {msg.message}</div>
-           ))}
+          {lastIndex.map(
+            (msg, id) =>
+              msg.type === 'bot' && (
+                <div key={id}>{addResponseMessage(msg.message)}</div>
+              )
+          )}
           <div ref={endOfMessages}></div>
         </div>
-        {/* Input Box */}
-        <input
-          id="chat"
-          onChange={(e) => setMessage(e.target.value)}
-          onKeyPress={handleClick}
-          value={message}
-          placeholder="type in your text to chat"
-        ></input>
-        <br/>
-        <button onClick='' >Click to continue</button>
       </div>
     </div>
   );

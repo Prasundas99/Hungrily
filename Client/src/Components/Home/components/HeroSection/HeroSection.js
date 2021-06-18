@@ -20,7 +20,7 @@ const HeroSection = () => {
           Welcome to Hungrily - an application focusing on providing food to the needful people with the help of volunteer helping in this crisis with foods <br />
           <br />
         </Typography>
-        <Link to="/Register" style={{ textDecoration: 'none', color: '#fff' }}>
+        <Link to="/login" style={{ textDecoration: 'none', color: '#fff' }}>
           <Button
             type="submit"
             variant="contained"
@@ -30,7 +30,7 @@ const HeroSection = () => {
            Login as Volinteer
           </Button>
         </Link>
-        <Link to="/Login" style={{ textDecoration: 'none', color: '#fff' }}>
+        <Link to="/login" style={{ textDecoration: 'none', color: '#fff' }}>
           <Button
             type="submit"
             variant="contained"

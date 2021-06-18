@@ -1,9 +1,10 @@
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import { blue, red } from '@material-ui/core/colors';
+import { purple } from '@material-ui/core/colors';
 
 const theme = createMuiTheme({
     palette: {
-        //type: "dark",
+        type: "dark",
         primary: {
             main: '#6c63ff',
         },
@@ -12,7 +13,7 @@ const theme = createMuiTheme({
         },
     },
     typography: {
-        fontFamily: 'Lato',
+        fontFamily: '"Segoe UI "',
         color: '#000',
         h1: {
             fontFamily: 'Prata',
@@ -21,7 +22,8 @@ const theme = createMuiTheme({
             fontFamily: 'Prata',
         },
         h3: {
-            fontFamily: 'Prata',
+            fontFamily: '"Segoe UI "',
+            fontWeight: 600,
         },
         h4: {
             fontFamily: 'Prata',

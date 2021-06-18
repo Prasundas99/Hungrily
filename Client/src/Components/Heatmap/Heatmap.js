@@ -18,7 +18,7 @@ const Heatmap = () => {
   useEffect(() => {
     /* global fetch */
     fetch('https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson')
-      // fetch('http://localhost:5000/api/heatmap/usermap')
+       //fetch('http://localhost:5000/api/heatmap/usermap')
       .then((resp) => resp.json())
       .then((json) => {
         // Note: In a real application you would do a validation of JSON data before doing anything with it,
@@ -37,7 +37,7 @@ const Heatmap = () => {
         {...viewport}
         width="100%"
         height="100%"
-        mapStyle="mapbox://styles/mapbox/basic-v9"
+        mapStyle="mapbox://styles/mapbox/dark-v8"
         onViewportChange={setViewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
       >

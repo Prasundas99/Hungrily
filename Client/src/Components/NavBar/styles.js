@@ -5,7 +5,7 @@ export default makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        backgroundColor: '#c3c3c3c3',
+        backgroundColor: theme.palette.primary,
     },
     navButton: {
         marginRight: theme.spacing(2),

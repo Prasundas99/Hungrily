@@ -8,7 +8,7 @@ import { Grid } from '@material-ui/core';
 
 import { getSteps, getStepContent } from './stepValues';
 import { useStyles } from './style';
-import Plag from '../../../../Assets/b.jpg';
+import Plag from '../../../../Assets/b.png';
 
 export default function VerticalLinearStepper() {
   const classes = useStyles();

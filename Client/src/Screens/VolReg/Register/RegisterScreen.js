@@ -16,20 +16,15 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import * as yup from 'yup';
 import { useFormik } from 'formik';
-
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 
-import FormContainer from '../../Components/FormContainer';
+import FormContainer from '../../../Components/FormContainer';
 import useStyles from './styles';
-import registerSvg from '../../Assets/register.svg';
-
-//Redux
-import { useDispatch, useSelector } from 'react-redux';
-import { registerNewUser } from '../../redux/action-creators';
+import registerSvg from '../../../Assets/register.svg';
 
 const RegistrationScreen = ({ location }) => {
   const classes = useStyles();
-  const dispatch = useDispatch();
   const history = useHistory();
 
   const [open, setOpen] = useState(false);
@@ -61,17 +56,7 @@ const RegistrationScreen = ({ location }) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      dispatch(
-        registerNewUser(
-          values.name,
-          values.email,
-          values.password,
-          values.geometry,
-          values.userLocation
-        )
-      );
-      console.log(values);
-      // history.push('/login');
+     history.push('/RegPending');
     },
   });
 
@@ -118,7 +103,7 @@ const RegistrationScreen = ({ location }) => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Register
+          Volunteer  Register
           </Typography>
           {error && (
             <Alert
