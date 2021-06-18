@@ -10,16 +10,38 @@ import {
   sendMessage,
 } from '../../redux/action-creators/watsonAction';
 
+import { createUserFoodRequest } from '../../redux/action-creators/';
+
 const Chat = () => {
   // Handle Users Message
   const endOfMessages = useRef(null);
+  const widgetRef = useRef(null);
   const dispatch = useDispatch();
+  const userInputPreference = 'veg';
 
   const { messages: fetchMessages } = useSelector((state) => state.watson);
+  const lastIndex = fetchMessages.slice(-1);
 
-  var lastIndex = fetchMessages.slice(-1);
+  /**MIND THE EXTRA SPACE (POTENTIAL BUG ELEMENT) */
 
-  useEffect(() => {}, [0]);
+  useEffect(() => {
+    if (widgetRef) {
+      if (fetchMessages) {
+        if (
+          lastIndex.length > 0 &&
+          lastIndex[0].message === 'okay we will reach to  you.'
+        ) {
+          dispatch(createUserFoodRequest({ preference: userInputPreference }));
+        }
+      }
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, fetchMessages]);
+
+  // if (lastIndex) {
+  //   console.log('last index logging');
+  // }
 
   const handleNewUserMessage = (newMessage) => {
     console.log(`New message incoming! ${newMessage}`);
@@ -30,7 +52,7 @@ const Chat = () => {
 
   return (
     <div>
-      <Widget handleNewUserMessage={handleNewUserMessage} />
+      <Widget ref={widgetRef} handleNewUserMessage={handleNewUserMessage} />
       <div className="convo-container">
         <div class="historyContainer">
           {lastIndex.map(

@@ -7,3 +7,7 @@ export const LOGIN_USER_SUCCESS = 'login_user_success';
 export const LOGIN_USER_FAILURE = 'login_user_failure';
 
 export const LOGOUT_USER = 'logout_user';
+
+export const CREATE_FOOD_REQUEST = 'create_food_request';
+export const CREATE_FOOD_REQUEST_SUCCESS = 'create_food_request_success';
+export const CREATE_FOOD_REQUEST_FAILURE = 'create_food_request_failure';

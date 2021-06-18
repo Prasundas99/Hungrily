@@ -1,30 +1,24 @@
-import React, {useEffect} from 'react';
-import { Widget, addResponseMessage  } from 'react-chat-widget';
- 
-import 'react-chat-widget/lib/styles.css';
- 
-function Chat() {
+// import React, { useEffect } from 'react';
+// import { Widget, addResponseMessage } from 'react-chat-widget';
 
+// import 'react-chat-widget/lib/styles.css';
 
-  useEffect(() => {
-    addResponseMessage('Welcome to this awesome chat!');
+// function Chat() {
+//   useEffect(() => {
+//     addResponseMessage('Welcome to this awesome chat!');
+//   }, []);
 
-  }, [0]);
+//   const handleNewUserMessage = (newMessage) => {
+//     console.log(`New message incoming! ${newMessage}`);
+//     // Now send the message throught the backend API
+//     addResponseMessage(newMessage);
+//   };
 
-  const handleNewUserMessage = (newMessage) => {
-    console.log(`New message incoming! ${newMessage}`);
-    // Now send the message throught the backend API
-    addResponseMessage(newMessage);
-  };
+//   return (
+//     <div className="Chat">
+//       <Widget handleNewUserMessage={handleNewUserMessage} />
+//     </div>
+//   );
+// }
 
-  return (
-    <div className="Chat">
-      <Widget 
-      
-      handleNewUserMessage={handleNewUserMessage}
-      />
-    </div>
-  );
-}
- 
-export default Chat;
+// export default Chat;

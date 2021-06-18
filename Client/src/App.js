@@ -11,7 +11,6 @@ import RegistrationScreen from './Screens/Register/RegisterScreen';
 import VolunteerScreen from './Screens/Volunteer/VolunteerScreen';
 import Chat from './Components/Chat';
 
-
 import theme from './theme';
 
 import useStyles from './styles';
@@ -19,26 +18,27 @@ import store from './redux/';
 
 //For Watson session storage
 // Import action
-import { createSession } from "./redux/action-creators/watsonAction";
+import { createSession } from './redux/action-creators/watsonAction';
 
 // Import axios
-import axios from "axios";
+import axios from 'axios';
 import { NightsStay } from '@material-ui/icons';
 
 // TODO: Remove session_id from localstorage when app is closed
 if (localStorage.session) {
   // delete axios.defaults.headers.common["session_id"];
-  axios.defaults.headers.common["session_id"] = localStorage.session;
+  // axios.defaults.headers.common["session_id"] = localStorage.session;
+  axios.defaults.headers.common['session_id'] = localStorage.getItem('session');
 } else {
   // delete axios.defaults.headers.common["session_id"];
-  localStorage.removeItem("session_id");
+  localStorage.removeItem('session_id');
 }
 
 const App = () => {
   const classes = useStyles();
   useEffect(() => {
     // Check if there session
-    if (!localStorage.session) { 
+    if (!localStorage.session) {
       // Create
       store.dispatch(createSession());
     }
@@ -57,7 +57,7 @@ const App = () => {
             <Route path="/volunteer/profile" component={VolunteerScreen} />
           </main>
         </Container>
-        <Chat/>
+        <Chat />
       </ThemeProvider>
     </BrowserRouter>
   );
