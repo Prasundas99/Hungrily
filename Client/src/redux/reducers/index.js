@@ -4,12 +4,14 @@ import watson from './watson';
 import { recievedFoodRequestReducer } from './volunteer.js';
 import registerUserReducer from './registerUser';
 import createFoodRequestReducer from './userFoodRequest';
+import { userFoodRequestReducer } from './fetchUserFoodRequest.js';
 
 const rootReducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: registerUserReducer,
   recievedFoodRequests: recievedFoodRequestReducer,
-  userFoodRequest: createFoodRequestReducer,
+  userCreatedFoodRequest: createFoodRequestReducer,
+  userFoodRequest: userFoodRequestReducer,
   watson: watson,
 });
 

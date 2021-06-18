@@ -9,3 +9,11 @@ export const createFoodRequest = (preference, bearerToken) =>
       Authorization: `Bearer ${bearerToken}`,
     },
   });
+
+export const getUserFoodRequest = (bearerToken) =>
+  axios.get(`${url}/user`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${bearerToken}`,
+    },
+  });

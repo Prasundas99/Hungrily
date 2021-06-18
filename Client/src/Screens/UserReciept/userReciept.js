@@ -8,11 +8,11 @@ import {
   Tabs,
   Tab,
 } from '@material-ui/core';
-import CardList from '../../Components/CardList/CardList';
-import Heatmap from '../../Components/Heatmap/Heatmap';
+
+import RecieptList from '../../Components/ReceiptList/RecieptList';
 import useStyles from './styles.js';
 
-const VolunteerScreen = () => {
+const UserReceiptScreen = () => {
   // const dispatch = useDispatch();
   const [selectedTab, setSelectedTab] = useState(0);
   const notMobileDevice = useMediaQuery('(min-width:600px)');
@@ -21,14 +21,6 @@ const VolunteerScreen = () => {
   const handleChange = (event, newValue) => {
     setSelectedTab(newValue);
   };
-
-  // const { data, error, loading } = useSelector(
-  //   (state) => state.recievedFoodRequests
-  // );
-
-  // useEffect(() => {
-  //   dispatch(fetchRecievedFoodRequests());
-  // }, [dispatch]);
 
   return (
     <>
@@ -42,17 +34,15 @@ const VolunteerScreen = () => {
             onChange={handleChange}
             className={classes.tabs}
           >
-            <Tab label="Request List" />
-            <Tab label="Request HeatMap" />
+            <Tab label="Reciept List" />
           </Tabs>
         </Grid>
         <Grid item sm={12} md={10}>
-          {selectedTab === 0 && <CardList />}
-          {selectedTab === 1 && <Heatmap />}
+          {selectedTab === 0 && <RecieptList />}
         </Grid>
       </Grid>
     </>
   );
 };
 
-export default VolunteerScreen;
+export default UserReceiptScreen;

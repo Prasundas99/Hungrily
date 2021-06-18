@@ -1,29 +1,22 @@
 import React, { useEffect, useState } from 'react';
 
-import {
-  Typography,
-  Grid,
-  LinearProgress,
-  useMediaQuery,
-  Tabs,
-  Tab,
-} from '@material-ui/core';
+import { Typography, LinearProgress } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
-import RequestCard from '../RequestCard/RequestCard.js';
+import RecieptCard from '../RecieptCard/ReceiptCard.js';
 import useStyles from './styles.js';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchRecievedFoodRequests } from '../../redux/action-creators';
+import { fetchUserFoodRequests } from '../../redux/action-creators';
 
-const CardList = () => {
+const RecieptList = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const { data, error, loading } = useSelector(
-    (state) => state.recievedFoodRequests
+    (state) => state.userFoodRequest
   );
 
   useEffect(() => {
-    dispatch(fetchRecievedFoodRequests());
+    dispatch(fetchUserFoodRequests());
   }, [dispatch]);
 
   return (
@@ -47,7 +40,7 @@ const CardList = () => {
             FOOD REQUESTS
           </Typography>
           {data.map((foodReq) => {
-            return <RequestCard key={foodReq.id} foodRequest={foodReq} />;
+            return <RecieptCard key={foodReq.id} foodRequest={foodReq} />;
           })}
         </div>
       )}
@@ -55,4 +48,4 @@ const CardList = () => {
   );
 };
 
-export default CardList;
+export default RecieptList;

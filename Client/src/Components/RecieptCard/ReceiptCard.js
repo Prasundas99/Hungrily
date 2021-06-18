@@ -9,7 +9,7 @@ import {
 
 import useStyles from './styles';
 
-const RequestCard = ({ foodRequest }) => {
+const RecieptCard = ({ foodRequest }) => {
   const classes = useStyles();
   let formattedDate = new Date(foodRequest.createdAt).toDateString();
 
@@ -24,7 +24,7 @@ const RequestCard = ({ foodRequest }) => {
               component="h6"
               color="textSecondary"
             >
-              <strong>Name: </strong>
+              <strong>Volunteer: </strong>
             </Typography>
             <Typography gutterBottom variant="h6" color="textPrimary">
               {foodRequest.recievedBy.name}
@@ -84,4 +84,4 @@ const RequestCard = ({ foodRequest }) => {
   );
 };
 
-export default RequestCard;
+export default RecieptCard;

@@ -9,6 +9,7 @@ import SignIn from './Screens/SignIn/SignIn';
 import HomeScreen from './Screens/Home/HomeScreen';
 import RegistrationScreen from './Screens/Register/RegisterScreen';
 import VolunteerScreen from './Screens/Volunteer/VolunteerScreen';
+import UserReceiptScreen from './Screens/UserReciept/userReciept';
 import Chat from './Components/Chat';
 
 import theme from './theme';
@@ -26,11 +27,11 @@ import { NightsStay } from '@material-ui/icons';
 
 // TODO: Remove session_id from localstorage when app is closed
 if (localStorage.session) {
-  // delete axios.defaults.headers.common["session_id"];
-  // axios.defaults.headers.common["session_id"] = localStorage.session;
-  axios.defaults.headers.common['session_id'] = localStorage.getItem('session');
+  delete axios.defaults.headers.common['session_id'];
+  axios.defaults.headers.common['session_id'] = localStorage.session;
+  // axios.defaults.headers.common['session_id'] = localStorage.session;
 } else {
-  // delete axios.defaults.headers.common["session_id"];
+  delete axios.defaults.headers.common['session_id'];
   localStorage.removeItem('session_id');
 }
 
@@ -54,6 +55,7 @@ const App = () => {
             <Route path="/" exact component={HomeScreen} />
             <Route path="/login" component={SignIn} />
             <Route path="/register" component={RegistrationScreen} />
+            <Route path="/reciept" component={UserReceiptScreen} />
             <Route path="/volunteer/profile" component={VolunteerScreen} />
           </main>
         </Container>
