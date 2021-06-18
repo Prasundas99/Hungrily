@@ -185,3 +185,8 @@ textarea {
 .rcw-launcher {
     background-color: #5146af;
 }
+
+.rcw-message > .rcw-response {
+     background-color: #fff !important; 
+    color: black;
+}

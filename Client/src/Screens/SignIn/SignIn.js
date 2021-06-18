@@ -43,8 +43,8 @@ const SignInScreen = ({ location }) => {
 
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
+      email: 'soumava.rivu@gmail.com',    //volunteer.test@hungrily.com
+      password: 'frost1234',                   //test1234
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -141,7 +141,7 @@ const SignInScreen = ({ location }) => {
                   to="/register"
                   style={{
                     textDecoration: 'none',
-                    color: 'primary',
+                    color: '#fff',
                   }}
                 >
                   <Typography variant="body2" component="p">
@@ -155,6 +155,10 @@ const SignInScreen = ({ location }) => {
                     </span>
                   </Typography>
                 </Link>
+                <Typography component='span' color='primary' >
+                        Sign in with these credentials for Volunteer login  
+                        <p>To login as User please register as a user with a fake email address</p>
+                </Typography>
               </Grid>
             </Grid>
           </form>

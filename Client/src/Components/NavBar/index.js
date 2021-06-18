@@ -54,8 +54,8 @@ const Header = () => {
   return (
     <AppBar color="transparent" position="static">
       <Toolbar className={classes.navWrapper}>
-        <Link to="/" style={{ textDecoration: 'none', color: 'primary' }}>
-          <Typography component="div" variant="h4">
+        <Link to="/" style={{ textDecoration: 'none', color: '#fff', padding: '0.9rem', fontWeight: '900' }}>
+          <Typography component='strong' variant='h3' >
             Hungrily
           </Typography>
         </Link>
@@ -72,7 +72,7 @@ const Header = () => {
                 }`}
                 style={{
                   textDecoration: 'none',
-                  color: 'primary',
+                  color: '#fff',
                 }}
               >
                 <Tooltip title="reciept">
@@ -107,7 +107,7 @@ const Header = () => {
                       }`}
                       style={{
                         textDecoration: 'none',
-                        color: 'primary',
+                        color: '#fff',
                       }}
                     >
                       <MenuItem onClick={handleClose}>Reciept</MenuItem>
@@ -118,7 +118,7 @@ const Header = () => {
                       to="/"
                       style={{
                         textDecoration: 'none',
-                        color: 'primary',
+                        color: '#fff',
                       }}
                     >
                       <MenuItem onClick={logoutUser}>Logout</MenuItem>
@@ -131,7 +131,7 @@ const Header = () => {
                     to="/login"
                     style={{
                       textDecoration: 'none',
-                      color: 'primary',
+                      color: '#fff',
                     }}
                   >
                     <Tooltip title="login">
@@ -192,7 +192,7 @@ const Header = () => {
                       to="/login"
                       style={{
                         textDecoration: 'none',
-                        color: 'primary',
+                        color: '#fff',
                       }}
                     >
                       <ListItem button>

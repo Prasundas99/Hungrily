@@ -30,7 +30,7 @@ const Chat = () => {
       if (fetchMessages) {
         if (
           lastIndex.length > 0 &&
-          lastIndex[0].message === 'okay we will reach to  you.'
+          lastIndex[0].message === 'We have received your request. A volunteer shall be assigned shortly. please navigate to your receipts now. Thank you.'
         ) {
           dispatch(createUserFoodRequest({ preference: userInputPreference }));
         }

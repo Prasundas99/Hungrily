@@ -14,7 +14,7 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: 'left',
     fontSize: '2.4rem',
     fontWeight: '900',
-    color: 'rgb(5, 24, 104)',
+    color: '#fff',
   },
   button: {
     marginTop: theme.spacing(1),
@@ -28,7 +28,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   stepLabel: {
     fontSize: '1.6rem',
-    color: 'rgb(81, 70, 175)',
+    color: '#5146af',
     fontWeight: '800',
   },
 }));

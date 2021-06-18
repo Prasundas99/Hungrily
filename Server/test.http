@@ -1,0 +1,14 @@
+POST http://localhost:5000/api/users
+Content-Type: application/json
+
+  {
+    name: "Test Volunteer",
+    email: "volunteer.test@hungrily.com",
+    password: "test123",
+    location: "Kobra",
+    isVolunteer: true,
+    geometry: {
+      type: "Point",
+      coordinates: [89.40673828125, 19.828725387681168],
+    },
+  }
