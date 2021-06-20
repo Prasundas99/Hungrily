@@ -1,6 +1,6 @@
-# Submission or project name
+# Hungrily
 
-[![License](https://img.shields.io/badge/License-Apache2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0) [![Community](https://img.shields.io/badge/Join-Community-blue)](https://developer.ibm.com/callforcode/get-started/) [![Website](https://img.shields.io/badge/View-Website-blue)](https://sample-project.s3-web.us-east.cloud-object-storage.appdomain.cloud/)
+[![License](https://img.shields.io/badge/License-Apache2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0) [![Community](https://img.shields.io/badge/Join-Community-blue)](https://developer.ibm.com/callforcode/get-started/) [![Website](https://img.shields.io/badge/View-Website-blue)](https://hungrily.netlify.app/)
 
 A basic GitHub repository  with documentation and code of Hungrily, a hacathon project of  WitAce hacathon 2021.
 
@@ -18,7 +18,6 @@ A basic GitHub repository  with documentation and code of Hungrily, a hacathon p
   - [The architecture](#the-architecture)
   - [Long description](#long-description)
   - [Project roadmap](#project-roadmap)
-  - [Getting started](#getting-started)
   - [Live demo](#live-demo)
   - [Built with](#built-with)
   - [Contributing](#contributing)
@@ -82,9 +81,11 @@ See below for our proposed schedule on next steps after WitAce 2021 submission.
 ## Built with
 
 - [IBM Cloudant](https://cloud.ibm.com/catalog?search=cloudant#search_results) - The NoSQL database used
-- [IBM Cloud Functions](https://cloud.ibm.com/catalog?search=cloud%20functions#search_results) - The compute platform for handing logic
+- [IBM Cloud Functions](https://cloud.ibm.com/catalog?search=cloud%20functions#search_results)
+- The compute platform for handing logic
 - [IBM API Connect](https://cloud.ibm.com/catalog?search=api%20connect#search_results) 
-- The web framework used
+
+## The web framework used
 - React and Node JS
 - Watson Services
 - MongoDB Express
@@ -95,7 +96,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
+We use [Github](http://github.com/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
 
 ## Authors
  1. Sohini Chakraborty
