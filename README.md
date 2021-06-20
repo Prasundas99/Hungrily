@@ -78,6 +78,9 @@ See below for our proposed schedule on next steps after WitAce 2021 submission.
 
 [Project website](https://hungrily.netlify.app/)
 
+## Screenshot
+![Screenshot 2021-06-21 000348](https://user-images.githubusercontent.com/58937669/122684660-4993a300-d224-11eb-9939-b9e7310bf1f3.png)
+
 ## Built with
 
 - [IBM Cloudant](https://cloud.ibm.com/catalog?search=cloudant#search_results) - The NoSQL database used
@@ -99,11 +102,11 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 We use [Github](http://github.com/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
 
 ## Authors
- 1. Sohini Chakraborty
- 2. Sudeshna Bhowmik
- 3. Srijita Bandopadhyay
- 4. Prasun Das
- 5. Soumava Banerjee
+ 1. [Sohini Chakraborty](https://github.com/Sohi-dev)
+ 2. [Sudeshna Bhowmik](https://www.linkedin.com/in/sudeshna-bhowmik-65749820a/)
+ 3. [Srijita Bandopadhyay](https://github.com/Srijita30)
+ 4. [Prasun Das](https://github.com/Prasundas99)
+ 5. [Soumava Banerjee](https://github.com/SoumavaBanerjee)
 
 ## License
 
