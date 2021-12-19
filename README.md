@@ -2,10 +2,6 @@
 
 [![License](https://img.shields.io/badge/License-Apache2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0) [![Community](https://img.shields.io/badge/Join-Community-blue)](https://developer.ibm.com/callforcode/get-started/) [![Website](https://img.shields.io/badge/View-Website-blue)](https://hungrily.netlify.app/)
 
-A basic GitHub repository  with documentation and code of Hungrily,a WiTACE 2021 Hackathon Solution using IBM Watson Assitant and GeoJson which create a common medium to connect the volunteers and users through a data-driven AI-based platform. This web application will enable the one in need to connect with their helper with just a single 'text'.
-
-> If you're new to open source, please consider taking the [free "Introduction to Open Source" class](https://cognitiveclass.ai/courses/introduction-to-open-source).
-
 ## Contents
 
 - [Submission or project name](#submission-or-project-name)
